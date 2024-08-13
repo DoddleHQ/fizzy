@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :organization
+  belongs_to :account
   has_many :sessions, dependent: :destroy
   has_many :splats, dependent: :destroy
 

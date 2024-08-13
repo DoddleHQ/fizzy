@@ -1,7 +1,7 @@
 class Current < ActiveSupport::CurrentAttributes
   attribute :user
 
-  def organization
-    user.organization
+  def account
+    user.account
   end
 end
