@@ -4,8 +4,6 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_secure_password validations: false
 
-  has_many :splats, dependent: :destroy
-
   normalizes :email_address, with: ->(value) { value.strip.downcase }
 
   def initials
