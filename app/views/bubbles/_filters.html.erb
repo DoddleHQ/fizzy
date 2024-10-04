@@ -1,3 +1,5 @@
+<% filter_params = params.permit(:filter, :tag_id, :assignee_id) %>
+
 <h1 class="txt-large">
   <div class="filter" data-controller="dialog" data-action="keydown.esc->dialog#close">
     <button class="btn btn--plain filter__button" data-action="click->dialog#toggle" data-dialog-modal-value="true">
@@ -44,13 +46,13 @@
     <dialog class="filter__popup panel fill-white shadow" data-dialog-target="dialog">
       <menu class="filter__menu flex flex-column gap-half unpad margin-none txt-medium">
         <% Current.account.tags.order(:title).each do |tag| %>
-          <li><%= link_to tag.title, bucket_bubbles_path(bucket, params.permit(:filter, :assignee_id).merge(tag_id: tag.id)) %></li>
+          <li><%= link_to tag.title, bucket_bubbles_path(bucket, filter_params.merge(tag_id: tag.id)) %></li>
         <% end %>
       </menu>
     </dialog>
 
     <% if tag %>
-      <%= link_to bucket_bubbles_path(bucket, params.permit(:filter, :assignee_id)), class: "btn", style: "font-size: 0.4em;" do %>
+      <%= link_to bucket_bubbles_path(bucket, filter_params.without(:tag_id)), class: "btn", style: "font-size: 0.4em;" do %>
         <%= image_tag "remove.svg", aria: { hidden: true }, size: 24 %>
         <span class="for-screen-reader">Clear</span>
       <% end %>
@@ -67,13 +69,13 @@
     <dialog class="filter__popup panel fill-white shadow" data-dialog-target="dialog">
       <menu class="filter__menu flex flex-column gap-half unpad margin-none txt-medium">
         <% Current.account.users.order(:name).each do |user| %>
-          <li><%= link_to user.name, bucket_bubbles_path(bucket, params.permit(:filter, :tag_id).merge(assignee_id: user.id)) %></li>
+          <li><%= link_to user.name, bucket_bubbles_path(bucket, filter_params.merge(assignee_id: user.id)) %></li>
         <% end %>
       </menu>
     </dialog>
 
     <% if assignee %>
-      <%= link_to bucket_bubbles_path(bucket, params.permit(:filter, :tag_id)), class: "btn", style: "font-size: 0.4em;" do %>
+      <%= link_to bucket_bubbles_path(bucket, filter_params.without(:assignee_id)), class: "btn", style: "font-size: 0.4em;" do %>
         <%= image_tag "remove.svg", aria: { hidden: true }, size: 24 %>
         <span class="for-screen-reader">Clear</span>
       <% end %>
