@@ -14,7 +14,7 @@ module Bubble::Staged
 
     transaction do
       update! stage: new_stage
-      track_event event, stage_name: stage.name
+      track_event event, stage_id: stage.id, stage_name: stage.name
     end
   end
 end
