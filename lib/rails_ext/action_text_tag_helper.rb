@@ -3,7 +3,7 @@ module ActionText
     def markdown_area(record, name, value: nil, data: {}, **options)
       field_name = "#{record.class.model_name.param_key}[#{name}]"
       value = record.safe_markdown_attribute(name).content.to_s if value.nil?
-      data = data.reverse_merge! uploads_url: action_text_markdown_uploads_url(format: "json")
+      data = data.reverse_merge! uploads_url: uploads_url(format: "json")
 
       tag.house_md value, name: field_name, data: data, **options
     end

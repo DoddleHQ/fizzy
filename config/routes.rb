@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   resource :first_run
   resource :session
 
+  resources :uploads, only: :create
+  get "/u/*slug" => "uploads#show", as: :upload
+
   resources :users do
     scope module: :users do
       resource :avatar
@@ -48,11 +51,6 @@ Rails.application.routes.draw do
 
   resources :workflows do
     resources :stages, module: :workflows
-  end
-
-  namespace :action_text, path: nil do
-    get "/u/*slug" => "markdown/uploads#show", as: :markdown_upload
-    post "/uploads" => "markdown/uploads#create", as: :markdown_uploads
   end
 
   get "join/:join_code", to: "users#new", as: :join

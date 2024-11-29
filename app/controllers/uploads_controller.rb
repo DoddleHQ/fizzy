@@ -1,4 +1,4 @@
-class ActionText::Markdown::UploadsController < ApplicationController
+class UploadsController < ApplicationController
   include ActiveStorage::SetCurrent
 
   def create
