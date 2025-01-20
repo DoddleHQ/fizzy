@@ -169,7 +169,9 @@
 
 /* Borders */
 .border { border: var(--border-size, 1px) var(--border-style, solid) var(--border-color, var(--color-subtle)); }
-.border-top { border-top: var(--border-size, 1px) var(--border-style, solid) var(--border-color, var(--color-subtle)); }
+.border-block { border-block: var(--border-size, 1px) var(--border-style, solid) var(--border-color, var(--color-subtle)); }
+.border-bottom { border-block-end: var(--border-size, 1px) var(--border-style, solid) var(--border-color, var(--color-subtle)); }
+.border-top { border-block-start: var(--border-size, 1px) var(--border-style, solid) var(--border-color, var(--color-subtle)); }
 .borderless { border: 0; }
 
 /* Border radius */

@@ -366,18 +366,24 @@
     text-decoration: none;
   }
 
-  li {
-    border-radius: 0.6em;
-    list-style: none;
-    padding: 0.5em var(--inline-space);
-    position: relative;
-    transition: background-color 200ms ease-out;
+  ul {
+    li {
+      border-radius: 0.6em;
+      list-style: none;
+      padding: 0.5em var(--inline-space);
+      position: relative;
+      transition: background-color 200ms ease-out;
+    }
 
-    @media (hover: hover) {
-      &:hover {
-        background-color: color(from var(--bubble-color) srgb r g b / 0.15);
-        border: 0;
-        border-radius: 0.6em;
+    &:not(.dragging) {
+      li {
+        @media (hover: hover) {
+          &:hover {
+            background-color: color(from var(--bubble-color) srgb r g b / 0.15);
+            border: 0;
+            border-radius: 0.6em;
+          }
+        }
       }
     }
   }
@@ -433,6 +439,10 @@
   flex-grow: 1;
   white-space: nowrap;
 
+  .drafted & {
+    color: color(from var(--color-ink) srgb r g b / 0.5);
+  }
+
   &::after {
     border-block-end: 1px dotted var(--color-subtle-dark);
     content: "";
@@ -442,9 +452,12 @@
 }
 
 .bubble__shape {
-  background-color: var(--bubble-color);
+  background-color: var(--bubble-background-color, var(--bubble-color));
   block-size: var(--bubble-size, 1.2em);
+  border-color: var(--bubble-border-color, var(--bubble-color));
   border-radius: var(--bubble-shape);
+  border-style: var(--bubble-border-style, solid);
+  border-width: var(--bubble-border-width, 0);
   inline-size: var(--bubble-size, 1.2em);
   pointer-events: none;
   position: relative;
@@ -454,13 +467,17 @@
 
   .bubble & {
     --bubble-size: 100%;
-
-    background-color: color(from var(--bubble-color) srgb r g b / 0.15);
-    border: var(--bubble-border-width) solid var(--bubble-color);
+    --bubble-background-color: color(from var(--bubble-color) srgb r g b / 0.15);
   }
 
-  .bubble.drafted & {
-    border-style: dashed;
+  .drafted & {
+    --bubble-border-style: dashed;
+
+    .bubbles-list & {
+      --bubble-background-color: color(from var(--bubble-color) srgb r g b / 0.15);
+      --bubble-border-color: var(--bubble-color);
+      --bubble-border-width: 0.15rem;
+    }
   }
 
   .bubble:has(.bubble__link) & {

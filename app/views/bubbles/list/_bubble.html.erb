@@ -1,4 +1,4 @@
-<li class="flex align-center gap-half margin-none" style="--bubble-color: <%= bubble.color %>; <%= bubble_rotation(bubble) %>"
+<li class="<%= class_names("flex align-center gap-half margin-none", drafted: bubble.drafted?) %>" style="--bubble-color: <%= bubble.color %>; <%= bubble_rotation(bubble) %>"
     data-controller="animation" data-animation-play-class="bubble--wobble" data-animation-play-on-load-value="true" data-action="mouseover->animation#play">
   <div class="bubble__shape flex-item-no-shrink"></div>
 

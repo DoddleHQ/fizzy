@@ -55,7 +55,7 @@ class AgoFormatter {
   }
 
   #pluralize(word, quantity) {
-    quantity = Math.round(quantity)
+    quantity = Math.floor(quantity)
     const suffix = (quantity === 1) ? "" : "s"
     return `${quantity} ${word}${suffix} ago`
   }
