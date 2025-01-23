@@ -20,15 +20,17 @@ export default class extends Controller {
 
   #dateIsToday(dt) {
     const date = new Date(this.dateValue)
-    return dt.getYear() == date.getYear() &&
-      dt.getMonth() == date.getMonth() &&
-      dt.getDay() == date.getDay()
+    return this.#sameDay(dt, date)
   }
 
   #isCurrentHour(dt) {
     const now = new Date()
-    const utcHour = dt.getUTCHours()
-    const localHour = now.getHours()
-    return utcHour === localHour
+    return this.#sameDay(dt, now) && dt.getHours() === now.getHours()
+  }
+
+  #sameDay(dt1, dt2) {
+    return dt1.getYear() === dt2.getYear() &&
+      dt1.getMonth() === dt2.getMonth() &&
+      dt1.getDay() === dt2.getDay()
   }
 }
