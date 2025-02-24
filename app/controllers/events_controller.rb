@@ -13,7 +13,11 @@ class EventsController < ApplicationController
     def events_by_hour_and_column
       user_events.where(created_at: @activity_day.all_day).
         group_by { |event| [ event.created_at.hour, helpers.event_column(event) ] }.
-        map { |hour_col, events| [ hour_col, events ] }
+        map { |hour_col, events|
+          [ hour_col,
+            events.uniq { |e| e.action == "boosted" ? [ e.creator_id, e.bubble_id ] : e.id }
+          ]
+        }
     end
 
     def latest_event_before_today
