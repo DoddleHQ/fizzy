@@ -131,4 +131,12 @@ class FilterTest < ActiveSupport::TestCase
     expected = { indexed_by: "most_discussed", assignee_ids: [ users(:jz).id, users(:kevin).id ] }
     assert_equal expected, filter.as_params_without(:assignee_ids, users(:david).id).to_h
   end
+
+  test "get a clone with some changed params" do
+    seed_filter = users(:david).filters.new indexed_by: "active", terms: [ "haggis" ]
+    filter = seed_filter.with(indexed_by: "popped")
+
+    assert filter.indexed_by.popped?
+    assert_equal ["haggis"], filter.terms
+  end
 end
