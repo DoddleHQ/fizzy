@@ -181,10 +181,6 @@
     --btn-border-color: var(--color-bg);
   }
 
-  .btn--small {
-    font-size: 0.8em;
-  }
-
   .btn--success {
     animation: success 1s ease-out;
 

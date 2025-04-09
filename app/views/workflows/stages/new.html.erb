@@ -5,7 +5,7 @@
       <%= icon_tag "check" %>
       <span class="for-screen-reader">Add stage</span>
     <% end %>
-    <%= link_to workflow_path(@workflow), class: "btn btn--small", data: { form_target: "cancel", controller: "hotkey", action: "keydown.esc@document->hotkey#click" } do %>
+    <%= link_to workflow_path(@workflow), class: "btn txt-small", data: { form_target: "cancel", controller: "hotkey", action: "keydown.esc@document->hotkey#click" } do %>
       <%= icon_tag "remove-med" %>
       <span class="for-screen-reader">Cancel</span>
     <% end %>

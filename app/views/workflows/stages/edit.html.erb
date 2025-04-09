@@ -5,18 +5,18 @@
   <% end %>
 
   <div class="flex align-center gap-half">
-    <%= tag.button type: :submit, class: "btn btn--small btn--positive", form: dom_id(@stage, :form) do %>
+    <%= tag.button type: :submit, class: "btn txt-small btn--positive", form: dom_id(@stage, :form) do %>
       <%= icon_tag "check" %>
       <span class="for-screen-reader">Save</span>
     <% end %>
 
-    <%= link_to workflow_path(@workflow), class: "btn btn--small", data: { turbo_frame: dom_id(@workflow) } do %>
+    <%= link_to workflow_path(@workflow), class: "btn txt-small", data: { turbo_frame: dom_id(@workflow) } do %>
       <%= icon_tag "remove-med" %>
       <span class="for-screen-reader">Cancel</span>
     <% end %>
 
     <% if @stage.workflow.stages.many? %>
-      <%= button_to workflow_stage_path(@stage.workflow, @stage), method: :delete, class: "btn btn--negative btn--small",
+      <%= button_to workflow_stage_path(@stage.workflow, @stage), method: :delete, class: "btn btn--negative txt-small",
           data: { turbo_frame: dom_id(@workflow), turbo_confirm: "Are you sure you want to delete this stage?" } do %>
         <%= icon_tag "minus" %>
         <span class="for-screen-reader">Delete <%= @stage.name %></span>

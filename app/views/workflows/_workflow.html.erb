@@ -14,7 +14,7 @@
       <%= turbo_frame_tag dom_id(workflow, :stages) do %>
         <%= render partial: "workflows/stages/stage", collection: workflow.stages %>
 
-        <%= link_to new_workflow_stage_path(workflow), class: "btn btn--small" do %>
+        <%= link_to new_workflow_stage_path(workflow), class: "btn txt-small" do %>
           <%= icon_tag "add" %>
           <span class="for-screen-reader">New stage</span>
         <% end %>
