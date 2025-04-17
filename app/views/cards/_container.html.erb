@@ -15,6 +15,7 @@
   </div>
 
   <% if card.published? %>
+    <%# FIXME: Let's move this aside outside of the card container section so these frames don't reload/flicker when card is replaced %>
     <aside class="card-perma__actions card-perma__actions--right" role="toolbar">
       <%= turbo_frame_tag card, :watch, src: card_watch_path(card) %>
       <%= turbo_frame_tag card, :pin, src: card_pin_path(card) %>
