@@ -3,7 +3,8 @@ module Mentions
 
   included do
     has_many :mentions, as: :container, dependent: :destroy
-    before_save :save_mentionable_content_before_save
+    has_many :mentionees, through: :mentions
+    before_save :remember_mentionable_content_before_save
     after_save_commit :create_mentions_later, if: :mentionable_content_changed?
   end
 
@@ -24,7 +25,7 @@ module Mentions
       self.class.reflect_on_all_associations(:has_one).filter { it.klass == ActionText::Markdown }
     end
 
-    def save_mentionable_content_before_save
+    def remember_mentionable_content_before_save
       @mentionable_content_before_safe = self.class.find(id).mentionable_content unless new_record?
     end
 
@@ -33,7 +34,7 @@ module Mentions
     end
 
     def mentionable_content_changed?
-      @mentionable_content_before_safe != mentionable_content
+      @mentionable_content_before_safe.present? && @mentionable_content_before_safe != mentionable_content
     end
 
     def scan_mentionees
