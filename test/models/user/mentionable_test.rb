@@ -6,6 +6,8 @@ class User::MentionableTest < ActiveSupport::TestCase
   end
 
   test "mentioned by" do
+    users(:david).mentions.destroy_all
+
     assert_difference -> { users(:david).mentions.count }, +1 do
       users(:david).mentioned_by users(:jz), at: cards(:logo)
     end

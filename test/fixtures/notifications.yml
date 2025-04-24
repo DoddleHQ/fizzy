@@ -15,3 +15,15 @@ layout_commented_kevin:
   source: layout_commented (Event)
   created_at: <%= 1.week.ago %>
   creator: david
+
+logo_card_david_mention_by_jz:
+  user: david
+  source: logo_card_david_mention_by_jz (Mention)
+  created_at: <%= 1.week.ago %>
+  creator: david
+
+logo_comment_david_mention_by_jz:
+  user: david
+  source: logo_comment_david_mention_by_jz (Mention)
+  created_at: <%= 1.week.ago %>
+  creator: david

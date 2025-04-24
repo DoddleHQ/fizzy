@@ -2,7 +2,6 @@ class Cards::ReadingsController < ApplicationController
   include CardScoped
 
   def create
-    @notifications = Current.user.notifications.where(source: @card.events)
-    @notifications.each(&:read)
+    @notifications = @card.read_by(Current.user)
   end
 end
