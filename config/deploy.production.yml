@@ -8,13 +8,10 @@ servers:
   web-replica:
     hosts:
       - fizzy-app-102
+    proxy: true
 
 proxy:
-  hosts:
-    - fizzy.37signals.com # will return a 404 for now
-    - 37s.fizzy.37signals.com
-    - dev.fizzy.37signals.com
-    - qa.fizzy.37signals.com
+  ssl: false
 
 ssh:
   user: app
@@ -47,3 +44,12 @@ accessories:
     cmd: beamer replica --primary=http://fizzy-app-101:5000/ --dir=/storage
     roles:
       - web-replica
+
+  load-balancer:
+    image: basecamp/kamal-proxy:lb
+    roles:
+      - web
+    options:
+      publish:
+        - 80:80
+        - 443:443
