@@ -24,6 +24,10 @@ class Command < ApplicationRecord
     false
   end
 
+  def needs_confirmation?
+    false
+  end
+
   private
     def redirect_to(...)
       Command::Result::Redirection.new(...)

@@ -42,7 +42,7 @@ module Card::Closeable
     closure&.created_at
   end
 
-  def close(user: Current.user, reason: Closure::Reason::FALLBACK_LABEL)
+  def close(user: Current.user, reason: Closure::Reason.default)
     unless closed?
       transaction do
         create_closure! user: user, reason: reason

@@ -17,7 +17,7 @@ class Command::AssignTest < ActionDispatch::IntegrationTest
     assert_includes @card.assignees, users(:kevin)
   end
 
-  test "assigns card on cards' index page" do
+  test "assigns cards on cards' index page" do
     execute_command "/assign @kevin @david", context_url: collection_cards_url(@card.collection)
 
     cards(:logo, :text, :layout).each do |card|

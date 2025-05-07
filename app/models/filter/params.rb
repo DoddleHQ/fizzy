@@ -5,6 +5,7 @@ module Filter::Params
     :assignment_status,
     :indexed_by,
     :engagement_status,
+    card_ids: [],
     assignee_ids: [],
     creator_ids: [],
     collection_ids: [],
@@ -40,8 +41,9 @@ module Filter::Params
       params[:assignment_status] = assignment_status
       params[:terms]             = terms
       params[:tag_ids]           = tags.ids
-      params[:collection_ids]        = collections.ids
+      params[:collection_ids]    = collections.ids
       params[:stage_ids]         = stages.ids
+      params[:card_ids]          = card_ids
       params[:assignee_ids]      = assignees.ids
       params[:creator_ids]       = creators.ids
     end.compact_blank.reject(&method(:default_value?))

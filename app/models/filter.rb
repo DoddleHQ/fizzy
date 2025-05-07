@@ -19,6 +19,7 @@ class Filter < ApplicationRecord
   def cards
     @cards ||= begin
       result = creator.accessible_cards.indexed_by(indexed_by)
+      result = result.where(id: card_ids) if card_ids.present? && !indexed_by.closed?
       result = result.open unless indexed_by.closed?
       result = result.by_engagement_status(engagement_status) if engagement_status.present?
       result = result.unassigned if assignment_status.unassigned?

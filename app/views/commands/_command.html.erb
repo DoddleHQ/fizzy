@@ -1,7 +1,11 @@
-<li class="min-width full-width flex gap-half terminal__item justify-start">
-  <button class="btn btn--plain overflow-ellipsis terminal__command flex-item-grow justify-start"><%= command.title %></button>
+<%= tag.li class: "min-width full-width flex gap-half terminal__item justify-start", tabindex: 0, data: {
+      action: "keydown.enter->terminal#restoreCommand:prevent keydown.enter->toggle-class#remove:prevent",
+      navigable_list_target: "item" } do %>
+  <%= button_tag command.title, type: "button", class: "btn btn--plain overflow-ellipsis terminal__command flex-item-grow justify-start",
+        data: { action: "toggle-class#remove terminal#restoreCommand", line: command.line } %>
 
   <% if command.undoable? %>
-    <%= button_to "Undo", command_undo_path(command), class: "btn btn--plain terminal__button flex-item-justify-end", data: { turbo_confirm: "Are you sure you want to undo '#{command.title}'?", turbo_frame: "_top" } %>
+    <%= button_to "Undo", command_undo_path(command), class: "btn btn--plain terminal__button flex-item-justify-end",
+          data: { turbo_confirm: "Are you sure you want to undo '#{command.title}'?", turbo_frame: "_top" } %>
   <% end %>
-</li>
+<% end %>

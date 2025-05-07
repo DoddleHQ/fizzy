@@ -13,6 +13,10 @@ class Closure::Reason < ApplicationRecord
       pluck(:label).presence || [ FALLBACK_LABEL ]
     end
 
+    def default
+      labels.first
+    end
+
     def create_defaults
       DEFAULT_LABELS.each do |label|
         create! label: label

@@ -11,6 +11,8 @@ class Command::Parser::Context
       user.accessible_cards.where id: params[:id]
     elsif controller == "cards" && action == "index"
       filter.cards
+    else
+      Card.none
     end
   end
 

@@ -11,8 +11,8 @@ export default class extends Controller {
   initialize() {
     this.timeFormatter = new Intl.DateTimeFormat(undefined, { timeStyle: "short" })
     this.dateFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "long" })
-    this.shortDateFormatter = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" })
-    this.dateTimeFormatter = new Intl.DateTimeFormat(undefined, { timeStyle: "short", dateStyle: "short" })
+    this.shortdateFormatter = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" })
+    this.datetimeFormatter = new Intl.DateTimeFormat(undefined, { timeStyle: "short", dateStyle: "short" })
     this.agoFormatter = new AgoFormatter()
     this.daysagoFormatter = new DaysAgoFormatter()
     this.datewithweekdayFormatter = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" })
@@ -46,11 +46,11 @@ export default class extends Controller {
   }
 
   datetimeTargetConnected(target) {
-    this.#formatTime(this.dateTimeFormatter, target)
+    this.#formatTime(this.datetimeFormatter, target)
   }
 
   shortdateTargetConnected(target) {
-    this.#formatTime(this.shortDateFormatter, target)
+    this.#formatTime(this.shortdateFormatter, target)
   }
 
   agoTargetConnected(target) {
@@ -78,7 +78,7 @@ export default class extends Controller {
   #formatTime(formatter, target) {
     const dt = new Date(target.getAttribute("datetime"))
     target.innerHTML = formatter.format(dt)
-    target.title = this.dateTimeFormatter.format(dt)
+    target.title = this.datetimeFormatter.format(dt)
   }
 }
 
