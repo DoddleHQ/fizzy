@@ -409,10 +409,6 @@
       --btn-size: 2em;
     }
 
-    .card__notification-meta {
-      font-size: var(--text-x-small);
-    }
-
     /* On mobile… */
     @media (max-width: 799px) {
       /* …add a border */
