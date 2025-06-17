@@ -358,7 +358,7 @@
     }
 
     .card__header {
-      margin-inline: calc(-1 * var(--card-padding-inline)) calc(-1 * var(--inline-space-half));
+      margin-inline: calc(-1 * var(--card-padding-inline));
       max-inline-size: unset;
     }
 
