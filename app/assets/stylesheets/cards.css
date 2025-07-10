@@ -106,14 +106,9 @@
   }
 
   .card__description {
-    house-md-toolbar,
-    .house-md-content {
-      color: color-mix(in srgb, var(--card-color) 40%, var(--color-ink));
-    }
-
-    .house-md-content {
-      min-block-size: 3lh;
-      padding: var(--block-space-half) var(--inline-space) 0 0;
+    /* Hide the empty element that Lexical saves when nothing is added to the description <p><br /></p> */
+    p:only-child:has(br:only-child) {
+      display: none;
     }
 
     & ~ .btn {
