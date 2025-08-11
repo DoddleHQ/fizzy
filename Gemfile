@@ -26,7 +26,7 @@ gem "geared_pagination", "~> 1.2"
 gem "rqrcode"
 gem "redcarpet"
 gem "rouge"
-gem "jbuilder"
+gem "jbuilder", "~> 2.13.0" # pin until I figure out why 2.14 breaks structured logging
 gem "actiontext-lexical", bc: "actiontext-lexical"
 gem "image_processing", "~> 1.14"
 gem "platform_agent"
