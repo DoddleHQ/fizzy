@@ -43,10 +43,10 @@ class Ai::Tool::OrderClause
     def sanitize_direction(direction)
       direction = direction&.downcase&.to_sym
 
-      unless ALLOWED_DIRECTIONS.include?(direction)
-        raise ArgumentError, "Invalid direction"
-      else
+      if ALLOWED_DIRECTIONS.include?(direction)
         direction
+      else
+        raise ArgumentError, "Invalid direction"
       end
     end
 end
