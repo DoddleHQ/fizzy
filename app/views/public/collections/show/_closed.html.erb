@@ -3,7 +3,9 @@
     <%= render partial: "cards/display/public_preview", collection: page.records, as: :card, cached: true %>
 
     <% unless page.last? %>
-      <%= public_collection_cards_next_page_link collection, "closed-cards", fetch_on_visible: true, page: page %>
+      <div class="full-width">
+        <%= public_collection_cards_next_page_link collection, "closed-cards", fetch_on_visible: true, page: page %>
+      </div>
     <% end %>
   <% else %>
     <p class="txt-medium translucent">Nothing here</p>
