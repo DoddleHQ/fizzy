@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { differenceInDays } from "helpers/date_helpers"
+import { differenceInDays, secondsToDate } from "helpers/date_helpers"
 
 const DEFAULT_LOCALE = "en-US"
 
@@ -89,7 +89,7 @@ export default class extends Controller {
   }
 
   #formatTime(formatter, target) {
-    const dt = new Date(parseInt(target.getAttribute("datetime"))*1000)
+    const dt = secondsToDate(parseInt(target.getAttribute("datetime")))
     target.innerHTML = formatter.format(dt)
     target.title = this.datetimeFormatter.format(dt)
   }

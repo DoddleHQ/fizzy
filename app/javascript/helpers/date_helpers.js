@@ -9,3 +9,7 @@ export function signedDifferenceInDays(fromDate, toDate) {
 export function beginningOfDay(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate())
 }
+
+export function secondsToDate(seconds) {
+  return new Date(seconds * 1000)
+}
