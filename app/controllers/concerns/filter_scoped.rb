@@ -38,4 +38,16 @@ module FilterScoped
         url_for(options)
       end
     end
+
+    def enable_referral_collection_filtering
+      @user_filtering.enable_collection_filtering do |**options|
+        if request.referer.present?
+          uri = URI.parse(request.referer)
+          uri.query = Rack::Utils.build_query(options)
+          uri.to_s
+        else
+          url_for(options)
+        end
+      end
+    end
 end
