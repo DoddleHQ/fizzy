@@ -89,11 +89,10 @@ class User::Filtering
   end
 
   def cache_key
-    ActiveSupport::Cache.expand_cache_key([ user, filter, expanded?, collections, tags, users, filters ], "user-filtering")
+    ActiveSupport::Cache.expand_cache_key([ user, filter, expanded?, collections, tags, users, filters, supports_collection_filtering? ], "user-filtering")
   end
 
-  private
-    def supports_collection_filtering?
-      @collection_filtering_route_resolver.present?
-    end
+  def supports_collection_filtering?
+    @collection_filtering_route_resolver.present?
+  end
 end
