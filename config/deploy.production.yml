@@ -27,10 +27,12 @@ accessories:
         - BASECAMP_REGISTRY_PASSWORD
     options:
       user: 1000 # Match the UID of the Rails app, for volume permissions
+      publish:
+        - 5001:5001
+        - 9000:9000
     volumes:
       - fizzy:/home/beamer
     cmd: beamer run --retention=1h --metrics-port=9000
-    port: 5001:5001
     hosts:
       - fizzy-app-101
       - fizzy-app-102

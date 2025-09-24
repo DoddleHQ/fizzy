@@ -8,12 +8,12 @@ receivers:
             - host: unix:///var/run/docker.sock
               refresh_interval: 10s
           relabel_configs:
-            # Limit scraping to labeled containers with port 9394 exposed
+            # Limit scraping to labeled containers with port 9394 or 9000 exposed
             - source_labels: [__address__]
-              regex: .*:9394
+              regex: .*:(9394|9000)
               action: keep
             - source_labels: [__meta_docker_container_name]
-              regex: (/fizzy-(web|jobs)-.*|/kamal-proxy)
+              regex: (/fizzy-(web|jobs)-.*|/fizzy-beamer|/kamal-proxy)
               action: keep
 
             # Pull service and role from Kamal Docker labels
@@ -23,13 +23,19 @@ receivers:
               target_label: role
 
             - source_labels: [__meta_docker_container_name]
-              regex: ^/kamal-proxy$
+              regex: ^/(kamal-proxy|fizzy-beamer)$
               target_label: service
-              replacement: kamal-proxy
+              replacement: $1
+
             - source_labels: [__meta_docker_container_name]
               regex: ^/kamal-proxy$
               target_label: role
               replacement: proxy
+
+            - source_labels: [__meta_docker_container_name]
+              regex: ^/fizzy-beamer$
+              target_label: role
+              replacement: beamer
 
 exporters:
   prometheus:
