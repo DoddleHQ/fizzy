@@ -435,6 +435,16 @@ columns:
   - *9
   cards:
   - *24
+  - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
+    auto_increment:
+    name: column_id
+    cast_type: *3
+    sql_type_metadata: *4
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
   - *5
   - &25 !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
     auto_increment:
@@ -610,6 +620,22 @@ columns:
   collections_filters:
   - *24
   - *20
+  columns:
+  - *24
+  - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
+    auto_increment:
+    name: color
+    cast_type: *7
+    sql_type_metadata: *8
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - *5
+  - *6
+  - *10
+  - *9
   comments:
   - *23
   - *5
@@ -1495,6 +1521,7 @@ primary_keys:
   collection_publications: id
   collections: id
   collections_filters:
+  columns: id
   comments: id
   conversation_messages: id
   conversations: id
@@ -1549,6 +1576,7 @@ data_sources:
   collection_publications: true
   collections: true
   collections_filters: true
+  columns: true
   comments: true
   conversation_messages: true
   conversations: true
@@ -1991,6 +2019,22 @@ indexes:
     valid: true
   - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
     table: cards
+    name: index_cards_on_column_id
+    unique: false
+    columns:
+    - column_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using:
+    include:
+    nulls_not_distinct:
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: cards
     name: index_cards_on_last_active_at_and_status
     unique: false
     columns:
@@ -2195,6 +2239,23 @@ indexes:
     unique: false
     columns:
     - filter_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using:
+    include:
+    nulls_not_distinct:
+    comment:
+    valid: true
+  columns:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: columns
+    name: index_columns_on_collection_id
+    unique: false
+    columns:
+    - collection_id
     lengths: {}
     orders: {}
     opclasses: {}
@@ -3191,4 +3252,4 @@ indexes:
     comment:
     valid: true
   workflows: []
-version: 20250917064006
+version: 20250924100149

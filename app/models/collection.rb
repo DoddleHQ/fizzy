@@ -5,6 +5,7 @@ class Collection < ApplicationRecord
 
   has_rich_text :public_description
 
+  has_many :columns, dependent: :destroy
   has_many :cards, dependent: :destroy
   has_many :tags, -> { distinct }, through: :cards
   has_many :events

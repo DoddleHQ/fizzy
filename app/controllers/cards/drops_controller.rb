@@ -41,7 +41,7 @@ class Cards::DropsController < ApplicationController
     end
 
     def render_column_replacement
-      columns = Cards::Columns.new(user_filtering: @user_filtering, page_size: CardsController::PAGE_SIZE)
+      columns = Cards::OldColumns.new(user_filtering: @user_filtering, page_size: CardsController::PAGE_SIZE)
       column = columns.public_send(@drop_target)
 
       if @drop_target == :doing && params[:stage_id].present?

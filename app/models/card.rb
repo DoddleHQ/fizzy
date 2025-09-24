@@ -5,6 +5,7 @@ class Card < ApplicationRecord
 
   belongs_to :collection, touch: true
   belongs_to :creator, class_name: "User", default: -> { Current.user }
+  belongs_to :column, optional: true
 
   has_many :comments, dependent: :destroy
   has_one_attached :image, dependent: :purge_later

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_09_17_064006) do
+ActiveRecord::Schema[8.1].define(version: 2025_09_24_100149) do
   create_table "accesses", force: :cascade do |t|
     t.datetime "accessed_at"
     t.integer "collection_id", null: false
@@ -133,6 +133,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_17_064006) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "collection_id", null: false
+    t.integer "column_id"
     t.datetime "created_at", null: false
     t.integer "creator_id", null: false
     t.date "due_on"
@@ -142,6 +143,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_17_064006) do
     t.string "title"
     t.datetime "updated_at", null: false
     t.index ["collection_id"], name: "index_cards_on_collection_id"
+    t.index ["column_id"], name: "index_cards_on_column_id"
     t.index ["last_active_at", "status"], name: "index_cards_on_last_active_at_and_status"
     t.index ["stage_id"], name: "index_cards_on_stage_id"
   end
@@ -195,6 +197,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_17_064006) do
     t.integer "filter_id", null: false
     t.index ["collection_id"], name: "index_collections_filters_on_collection_id"
     t.index ["filter_id"], name: "index_collections_filters_on_filter_id"
+  end
+
+  create_table "columns", force: :cascade do |t|
+    t.integer "collection_id", null: false
+    t.string "color", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_columns_on_collection_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -508,11 +519,13 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_17_064006) do
   add_foreign_key "ai_quotas", "users"
   add_foreign_key "card_activity_spikes", "cards"
   add_foreign_key "card_goldnesses", "cards"
+  add_foreign_key "cards", "columns"
   add_foreign_key "cards", "workflow_stages", column: "stage_id"
   add_foreign_key "closures", "cards"
   add_foreign_key "closures", "users"
   add_foreign_key "collection_publications", "collections"
   add_foreign_key "collections", "workflows"
+  add_foreign_key "columns", "collections"
   add_foreign_key "comments", "cards"
   add_foreign_key "conversation_messages", "conversations"
   add_foreign_key "conversations", "users"

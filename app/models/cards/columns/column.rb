@@ -1,4 +1,4 @@
-class Cards::Columns::Column
+class Cards::OldColumns::Column
   attr_reader :page, :filter, :user_filtering
 
   def initialize(page:, filter:, user_filtering:)

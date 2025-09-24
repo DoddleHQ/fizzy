@@ -1,4 +1,4 @@
-class Cards::Columns
+class Cards::OldColumns
   attr_reader :user_filtering, :page_size
 
   delegate :filter, to: :user_filtering
