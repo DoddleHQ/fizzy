@@ -91,7 +91,7 @@
     }
 
     &:not(.is-collapsed) {
-      padding-inline: var(--column-gap);
+      padding-inline: calc(var(--column-gap) * 2);
     }
   }
 
