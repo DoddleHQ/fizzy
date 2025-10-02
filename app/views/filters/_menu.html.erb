@@ -1,4 +1,4 @@
-<nav data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
+<nav data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside" data-turbo-permanent>
   <%= render "filters/menu/button" %>
 
   <%= tag.dialog class: "fizzy-menu filter popup popup--animated panel margin-block-start-half",
