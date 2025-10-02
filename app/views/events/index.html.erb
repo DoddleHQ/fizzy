@@ -14,6 +14,8 @@
 <% end %>
 
 <div class="events" id="activity">
-  <%= render "events/day", day_timeline: @day_timeline %>
+  <%= turbo_frame_tag :events_container do %>
+    <%= render "events/day", day_timeline: @day_timeline %>
+  <% end %>
 </div>
 <%= event_next_page_link(@day_timeline.next_day) %>

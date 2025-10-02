@@ -91,6 +91,7 @@ export default class extends Controller {
   #addHiddenFields() {
     this.#selectedValues().forEach(value => {
       const [field] = this.hiddenFieldTemplateTarget.content.cloneNode(true).children
+      field.removeAttribute("id")
       field.value = value
       this.element.appendChild(field)
     })
