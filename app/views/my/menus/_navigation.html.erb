@@ -1,5 +1,10 @@
 <div class="flex gap">
-  <%= jump_field_tag %>
+  <div class="flex flex-column full-width justify-center gap-half">
+    <% if Current.user.identity.memberships.many? %>
+      <strong class="center"><%= Account.sole.name %></strong>
+    <% end %>
+    <%= jump_field_tag %>
+  </div>
 
   <button class="nav__close btn borderless txt-small" data-action="dialog#close">
     <%= icon_tag "close" %>
