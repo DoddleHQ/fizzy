@@ -7,7 +7,7 @@ class Users::AvatarsController < ApplicationController
   before_action :ensure_permission_to_administer_user, only: :destroy
 
   def show
-    if stale? @user, cache_control: { max_age: (30.minutes unless Current.user == @user), stale_while_revalidate: 1.week }.compact
+    if stale? @user, cache_control: cache_control
       render_avatar_or_initials
     end
   end
@@ -24,6 +24,14 @@ class Users::AvatarsController < ApplicationController
 
     def ensure_permission_to_administer_user
       head :forbidden unless Current.user.can_change?(@user)
+    end
+
+    def cache_control
+      if @user == Current.user
+        {}
+      else
+        { max_age: 30.minutes, stale_while_revalidate: 1.week }
+      end
     end
 
     def render_avatar_or_initials

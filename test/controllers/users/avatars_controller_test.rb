@@ -8,7 +8,8 @@ class Users::AvatarsControllerTest < ActionDispatch::IntegrationTest
   test "show self without caching" do
     get user_avatar_path(users(:david))
     assert_match "image/svg+xml", @response.content_type
-    assert_nil @response.cache_control[:max_age]
+    assert @response.cache_control[:private]
+    assert_equal "0", @response.cache_control[:max_age]
   end
 
   test "show other with caching" do
