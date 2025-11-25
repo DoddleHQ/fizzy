@@ -2,7 +2,8 @@ class Cards::AssignmentsController < ApplicationController
   include CardScoped
 
   def new
-    @users = @board.users.active.alphabetically
+    @assigned_to = @card.assignees.active.alphabetically.where.not(id: Current.user)
+    @users = @board.users.active.alphabetically.where.not(id: @card.assignees).where.not(id: Current.user)
     fresh_when etag: [ @users, @card.assignees ]
   end
 

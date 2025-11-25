@@ -15,15 +15,9 @@
           type: "search", autocorrect: "off", autocomplete: "off", data: { "1p-ignore": "true", filter_target: "input", action: "input->filter#filter" } %>
 
     <ul class="popup__list" data-filter-target="list">
-      <% @users.each do |user| %>
-        <li class="popup__item" data-filter-target="item" data-navigable-list-target="item" aria-checked="<%= @card.assignees.include?(user) %>">
-          <%= button_to card_assignments_path(@card, params: { assignee_id: user.id }), method: :post,
-                class: "popup__btn btn", form_class: "max-width flex-item-grow" do %>
-            <span class="overflow-ellipsis flex-item-grow"><%= user.name %></span>
-            <%= icon_tag "check", size: 18, class: "checked flex-item-no-shrink flex-item-justify-end", style: "--icon-size: 1em" %>
-          <% end %>
-        </li>
-      <% end %>
+      <%= render partial: "user", locals: { card: @card, user: Current.user, user_label: "Me" } %>
+      <%= render collection: @assigned_to, partial: "user", locals: { card: @card } %>
+      <%= render collection: @users, partial: "user", locals: { card: @card } %>
     </ul>
   <% end %>
 <% end %>
