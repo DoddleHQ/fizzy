@@ -57,6 +57,22 @@ Under the hood, this will create or remove `tmp/email-dev.txt`.
 
 We recommend [Kamal](https://kamal-deploy.org/) for deploying Fizzy. This project comes with a vanilla Rails template, you can find our production setup in [`fizzy-saas`](https://github.com/basecamp/fizzy-saas).
 
+### Web Push Notifications
+
+Fizzy uses VAPID (Voluntary Application Server Identification) keys to send browser push notifications. You'll need to generate a key pair and set these environment variables:
+
+- `VAPID_PRIVATE_KEY`
+- `VAPID_PUBLIC_KEY`
+
+Generate them with the `web-push` gem:
+
+```ruby
+vapid_key = WebPush.generate_key
+
+puts "VAPID_PRIVATE_KEY=#{vapid_key.private_key}"
+puts "VAPID_PUBLIC_KEY=#{vapid_key.public_key}"
+```
+
 ## SaaS gem
 
 37signals bundles Fizzy with [`fizzy-saas`](https://github.com/basecamp/fizzy-saas), a companion gem that links Fizzy with our billing system and contains our production setup.
