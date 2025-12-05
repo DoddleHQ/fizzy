@@ -15,7 +15,7 @@ module SSRFProtection
   def resolve_public_ip(hostname)
     ip_addresses = resolve_dns(hostname)
     public_ips = ip_addresses.reject { |ip| private_address?(ip) }
-    public_ips.first&.to_s
+    public_ips.sort_by { |ipaddr| ipaddr.ipv4? ? 0 : 1 }.first&.to_s
   end
 
   def private_address?(ip)
