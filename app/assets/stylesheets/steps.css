@@ -102,8 +102,9 @@
 
     .icon {
       background-color: var(--color-ink-inverted);
-      block-size: 0.8em;
-      inline-size: 0.8em;
+      block-size: 0.875em;
+      inline-size: 0.875em;
+      mask-size: cover;
     }
   }
 }
