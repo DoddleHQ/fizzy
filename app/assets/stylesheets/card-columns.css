@@ -177,7 +177,7 @@
   .cards__transition-container {
     block-size: 100%;
     border-radius: calc(var(--column-width-collapsed) / 2);
-    translate: 0;
+    translate: 0 0.5ch; // Allow a little room for the mini bubble */
     transition: translate var(--column-transition-duration) var(--ease-out-overshoot-subtle);
 
     @media (min-width: 640px) {
@@ -229,10 +229,6 @@
       }
     }
 
-    .cards--grid & {
-      display: contents;
-    }
-
     [aria-selected] & .card[aria-selected] {
       outline: var(--focus-ring-size) solid var(--color-selected-dark);
       outline-offset: var(--focus-ring-offset);
@@ -270,14 +266,17 @@
     --cards-gap: 1rem;
     --card-grid-columns: 1;
 
+    align-items: start;
     container-type: inline-size;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: var(--cards-gap);
     justify-content: center;
+    inline-size: 100%;
     margin-inline: auto;
     max-inline-size: var(--main-width);
+    padding-inline: 1ch;
 
     @media (min-width: 640px) {
       --card-grid-columns: 2;
@@ -285,6 +284,10 @@
 
     @media (min-width: 960px) {
       --card-grid-columns: 3;
+    }
+
+    .cards__list {
+      display: contents;
     }
 
     .card {
@@ -632,6 +635,10 @@
     border: 1px solid var(--border-color);
     inline-size: auto;
     text-align: center;
+
+    @media (min-width: 800px) {
+      margin-inline: var(--column-padding);
+    }
 
     &:has(dialog[open]) {
       z-index: 5;
