@@ -39,9 +39,15 @@ class ZipFile
         )
 
         writer = Writer.new
-        service.upload(blob.key, writer.io) do |io|
-          writer.stream_to(io)
+
+        # Use S3's upload_stream directly for write-based streaming.
+        # ActiveStorage's upload method expects a read-based IO, but ZipKit
+        # needs a write-based stream. The TransferManager's upload_stream
+        # yields a writable IO that we can stream directly to.
+        service.send(:upload_stream, key: blob.key, part_size: 100.megabytes) do |write_stream|
+          writer.stream_to(write_stream)
           yield writer
+          writer.close
         end
 
         blob.update!(byte_size: writer.byte_size, checksum: writer.checksum)

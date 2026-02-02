@@ -1,13 +1,6 @@
 require "test_helper"
 
 class ZipFileTest < ActiveSupport::TestCase
-  test "writer io exposes size for S3 multipart upload detection" do
-    writer = ZipFile::Writer.new
-
-    assert_respond_to writer.io, :size
-    assert_equal writer.byte_size, writer.io.size
-  end
-
   test "writer adds files with content" do
     tempfile = Tempfile.new([ "test", ".zip" ])
     tempfile.binmode

@@ -9,10 +9,6 @@ class ZipFile::Writer
     @digest = Digest::MD5.new
   end
 
-  def io
-    @io ||= ZipFile::Writer::IO.new(self)
-  end
-
   def stream_to(io)
     @output_io = io
   end
