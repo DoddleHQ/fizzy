@@ -1,0 +1,25 @@
+services:
+  web:
+    image: ocode-workspace:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:54321:80"
+    environment:
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - DISABLE_SSL=${DISABLE_SSL}
+      - BASE_URL=${BASE_URL}
+      - MAILER_FROM_ADDRESS=${MAILER_FROM_ADDRESS}
+      - SMTP_ADDRESS=${SMTP_ADDRESS}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_DOMAIN=${SMTP_DOMAIN}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - VAPID_PRIVATE_KEY=${VAPID_PRIVATE_KEY}
+      - VAPID_PUBLIC_KEY=${VAPID_PUBLIC_KEY}
+    volumes:
+      - ocode:/rails/storage
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  ocode:
