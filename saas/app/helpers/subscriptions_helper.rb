@@ -5,9 +5,9 @@ module SubscriptionsHelper
 
   def subscription_period_end_action(subscription)
     if subscription.to_be_canceled?
-      "Your Fizzy subscription ends on"
+      "Your oCode subscription ends on"
     elsif subscription.canceled?
-      "Your Fizzy subscription ended on"
+      "Your oCode subscription ended on"
     else
       "Your next payment is <b>#{ format_currency(subscription.next_amount_due) }</b> on".html_safe
     end
