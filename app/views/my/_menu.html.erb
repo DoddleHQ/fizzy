@@ -4,8 +4,7 @@
   <%= tag.button class:"nav__trigger input input--select center flex-inline align-center txt-normal", data: {
         action: "click->dialog#open keydown.j@document->hotkey#click keydown.meta+j@document->hotkey#click keydown.ctrl+j@document->hotkey#click",
         controller: "hotkey" } do %>
-    <span><%= image_tag "fizzy.svg", alt: "", size: "30x30" %></span>
-    <strong class="txt-large font-weight-bold">oCode</strong>
+    <span><%= image_tag "ocode-logo.png", alt: "oCode", height: 30 %></span>
     <kbd class="kbd txt-xx-small hide-on-touch">J</kbd>
   <% end %>
 
