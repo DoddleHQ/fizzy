@@ -31,7 +31,7 @@
   <div class="flex align-center gap-half margin-block-end">
     <strong class="margin-block-end">Add an optional description to public page</strong>
     <div class="border-radius input fill-white">
-      <%= form_with model: board, class: "txt-align-start", data: { controller: "form", turbo_frame: "_top" } do |form| %>
+      <%= form_with model: board, class: "txt-align-start", data: { controller: "form", turbo_frame: "_top" } do %>
         <%= form.rich_text_area :public_description, :public_description, class: "lexy-content txt-small", placeholder: "Add a public note about this board…" %>
         <div data-controller="form">
           <span class="switch flex align-center justify-between">
