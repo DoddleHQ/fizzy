@@ -16,10 +16,39 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - VAPID_PRIVATE_KEY=${VAPID_PRIVATE_KEY}
       - VAPID_PUBLIC_KEY=${VAPID_PUBLIC_KEY}
+      - DATABASE_ADAPTER=mysql
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_USER=${MYSQL_USER:-fizzy}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-fizzy_production}
     volumes:
       - ocode:/rails/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    security_opt:
+      - no-new-privileges:true
+
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-fizzy_production}
+      - MYSQL_USER=${MYSQL_USER:-fizzy}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     security_opt:
       - no-new-privileges:true
 
 volumes:
   ocode:
+  mysql_data:

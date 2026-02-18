@@ -51,6 +51,13 @@
       overflow: visible;
       width: auto;
     }
+
+    img {
+      height: 100%;
+      max-height: 0.8625em;
+      width: auto;
+      object-fit: contain;
+    }
   }
 
   /* Dialog
