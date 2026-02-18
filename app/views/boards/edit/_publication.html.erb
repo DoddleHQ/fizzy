@@ -14,7 +14,7 @@
             <span class="switch__btn round"></span>
           </span>
         </label>
-      </form>
+      <% end %>
     </div>
   <% end %>
 
@@ -24,21 +24,21 @@
       <%= button_to_copy_to_clipboard(published_board_url(board)) do %>
         <%= icon_tag "copy-paste" %>
         <span class="for-screen-reader">Copy public link</span>
-      </button>
+      <% end %>
     </div>
   </div>
 
   <div class="flex align-center gap-half margin-block-end">
     <strong class="margin-block-end">Add an optional description to public page</strong>
     <div class="border-radius input fill-white">
-      <%= form_with model: board, class: "txt-align-start", data: { controller: "form", turbo_frame: "_top" } do %>
+      <%= form_with model: board, class: "txt-align-start", data: { controller: "form", turbo_frame: "_top" } do |form| %>
         <%= form.rich_text_area :public_description, :public_description, class: "lexy-content txt-small", placeholder: "Add a public note about this board…" %>
         <div data-controller="form">
           <span class="switch flex align-center justify-between">
             <%= form.check_box :public_description, class: "switch__input", checked: board.public_description.present?, data: { action: "keydown.ctrl+enter->form#submit:prevent keydown.meta+enter->form#submit:prevent keydown.esc->form#cancel:stop" } %>
             <span class="switch__btn round"></span>
           </span>
-        </span>
+        </div>
         </div>
         <%= form.submit "Save changes", class: "btn txt-small", title: "Save changes (#{hotkey_label(["ctrl", "enter"])})" %>
       <% end %>
